@@ -69,41 +69,41 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPackage 
   return (
     <section
       id="pricing"
-      className="bg-[#0C0C0C] text-[#D7E2EA] px-5 sm:px-8 md:px-10 py-24 sm:py-32 relative border-t border-white/10"
+      className="bg-[#0C0C0C] text-[#D7E2EA] px-4 sm:px-8 md:px-10 py-12 sm:py-24 md:py-32 relative border-t border-white/10"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <FadeIn delay={0} y={30}>
-          <div className="text-center mb-16 sm:mb-20">
-            <span className="text-xs uppercase tracking-widest text-purple-400 font-semibold mb-3 inline-block">
+          <div className="text-center mb-8 sm:mb-16 md:mb-20">
+            <span className="text-[11px] sm:text-xs uppercase tracking-widest text-purple-400 font-semibold mb-2 sm:mb-3 inline-block">
               Flexible Agency Tiers
             </span>
             <h2
-              className="hero-heading font-black uppercase text-center leading-none tracking-tight mb-4"
-              style={{ fontSize: 'clamp(2.5rem, 8vw, 90px)' }}
+              className="hero-heading font-black uppercase text-center leading-none tracking-tight mb-2 sm:mb-4"
+              style={{ fontSize: 'clamp(2.1rem, 7vw, 90px)' }}
             >
               Packages &amp; Pricing
             </h2>
-            <p className="text-[#D7E2EA]/70 max-w-2xl mx-auto text-sm sm:text-base font-light">
+            <p className="text-[#D7E2EA]/70 max-w-2xl mx-auto text-xs sm:text-base font-light px-2">
               Clear creative scopes tailored to your brand stage. We believe in transparent scope customization rather than one-size-fits-all rigid fees.
             </p>
           </div>
         </FadeIn>
 
         {/* 3 Packages Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8 items-stretch">
           {packages.map((pkg, idx) => (
             <FadeIn key={pkg.name} delay={idx * 0.1} y={25} className="h-full">
               <div
-                className={`h-full flex flex-col justify-between p-6 sm:p-8 rounded-[36px] relative transition-all duration-300 ${
+                className={`h-full flex flex-col justify-between p-5 sm:p-8 rounded-[28px] sm:rounded-[36px] relative transition-all duration-300 ${
                   pkg.featured
-                    ? 'bg-gradient-to-b from-purple-950/40 via-[#161616] to-[#121212] border-2 border-purple-500/60 shadow-2xl shadow-purple-950/50 scale-[1.02]'
+                    ? 'bg-gradient-to-b from-purple-950/40 via-[#161616] to-[#121212] border-2 border-purple-500/60 shadow-2xl shadow-purple-950/50 lg:scale-[1.02]'
                     : 'bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
                 }`}
               >
                 {/* Popular Pill */}
                 {pkg.featured && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[11px] font-semibold uppercase tracking-widest shadow-md flex items-center gap-1.5">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 sm:px-4 sm:py-1 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest shadow-md flex items-center gap-1.5 whitespace-nowrap">
                     <Sparkles className="w-3 h-3" />
                     <span>{pkg.badge}</span>
                   </div>
@@ -111,22 +111,22 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPackage 
 
                 <div>
                   {/* Top info */}
-                  <div className="mb-6">
-                    <span className="text-xs uppercase tracking-wider text-[#D7E2EA]/50 font-medium block mb-1">
+                  <div className="mb-4 sm:mb-6">
+                    <span className="text-[11px] sm:text-xs uppercase tracking-wider text-[#D7E2EA]/50 font-medium block mb-1">
                       {pkg.badge}
                     </span>
-                    <h3 className="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
+                    <h3 className="text-xl sm:text-3xl font-black uppercase text-white tracking-tight">
                       {pkg.name}
                     </h3>
-                    <p className="text-xs sm:text-sm text-purple-300/90 font-light mt-2 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-purple-300/90 font-light mt-1.5 sm:mt-2 leading-relaxed">
                       {pkg.target}
                     </p>
                   </div>
 
                   {/* Pricing indication (customized scope, not fake numbers) */}
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 mb-6">
+                  <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/[0.03] border border-white/5 mb-4 sm:mb-6">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight">
+                      <span className="text-lg sm:text-2xl font-bold text-white uppercase tracking-tight">
                         Tailored Scope
                       </span>
                     </div>
@@ -135,12 +135,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPackage 
                     </span>
                   </div>
 
-                  <p className="text-xs text-[#D7E2EA]/75 font-light leading-relaxed mb-6">
+                  <p className="text-xs text-[#D7E2EA]/75 font-light leading-relaxed mb-4 sm:mb-6">
                     {pkg.description}
                   </p>
 
                   {/* Feature list */}
-                  <div className="space-y-3 mb-8">
+                  <div className="space-y-2 sm:space-y-3 mb-5 sm:mb-8">
                     <span className="text-xs font-semibold uppercase tracking-wider text-white/90 block">
                       What&apos;s Included:
                     </span>
@@ -156,11 +156,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPackage 
                 </div>
 
                 {/* Package CTA */}
-                <div className="pt-4 border-t border-white/10">
+                <div className="pt-3.5 sm:pt-4 border-t border-white/10">
                   <button
                     onClick={() => onSelectPackage(pkg.name)}
                     type="button"
-                    className={`w-full py-3.5 px-6 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                    className={`w-full py-3 sm:py-3.5 px-5 sm:px-6 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
                       pkg.featured
                         ? 'contact-btn text-white shadow-lg shadow-purple-900/40 hover:brightness-110 active:scale-95'
                         : 'border border-white/20 text-[#D7E2EA] hover:bg-white/10 hover:text-white active:scale-95'

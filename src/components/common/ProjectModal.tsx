@@ -92,14 +92,27 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               </div>
             </div>
 
-            {/* Main Featured Image */}
+            {/* Main Featured Media */}
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-[#0C0C0C] aspect-[16/10] sm:aspect-[16/9] mb-4">
-              <img
-                src={currentDisplayImage}
-                alt={project.name}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover transition-all duration-300"
-              />
+              {currentDisplayImage.toLowerCase().includes('.mp4') ||
+              currentDisplayImage.toLowerCase().includes('.webm') ? (
+                <video
+                  src={currentDisplayImage}
+                  autoPlay
+                  controls
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <img
+                  src={currentDisplayImage}
+                  alt={project.name}
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover transition-all duration-300"
+                />
+              )}
               <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md text-xs text-white/80 border border-white/10 flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-purple-400" />
                 <span>Metic Media Production</span>

@@ -16,7 +16,7 @@ const METIC_PORTFOLIO: ProjectData[] = [
     year: '2026',
     tools: ['Premiere Pro', 'After Effects', 'CapCut Pro', 'AI Audio Enhancement'],
     col1Img1: '/src/assets/images/work_reels_mockup_1791411065773.jpg',
-    col1Img2: '/src/assets/images/hero_agency_display_1791411002591.jpg',
+    col1Img2: '/src/assets/images/service_content_creation_1791413033979.jpg',
     col2Img: '/src/assets/images/work_reels_mockup_1791411065773.jpg',
   },
   {
@@ -42,7 +42,7 @@ const METIC_PORTFOLIO: ProjectData[] = [
     year: '2026',
     tools: ['DaVinci Resolve', 'Premiere Pro', 'After Effects', 'Studio Audio Mastering'],
     col1Img1: '/src/assets/images/work_event_mockup_1791411089593.jpg',
-    col1Img2: '/src/assets/images/work_reels_mockup_1791411065773.jpg',
+    col1Img2: '/src/assets/images/service_social_media_1791413021409.jpg',
     col2Img: '/src/assets/images/work_event_mockup_1791411089593.jpg',
   },
   {
@@ -55,7 +55,7 @@ const METIC_PORTFOLIO: ProjectData[] = [
     year: '2026',
     tools: ['Adobe Illustrator', 'Photoshop', '3D Product Rendering', 'Figma'],
     col1Img1: '/src/assets/images/work_graphics_mockup_1791411099644.jpg',
-    col1Img2: '/src/assets/images/work_ads_mockup_1791411079463.jpg',
+    col1Img2: '/src/assets/images/service_ai_content_1791413045802.jpg',
     col2Img: '/src/assets/images/work_graphics_mockup_1791411099644.jpg',
   },
 ];
@@ -80,20 +80,20 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   return (
     <section
       id="work"
-      className="bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 relative z-10 pt-20 sm:pt-28 md:pt-36 pb-32 sm:pb-40 px-4 sm:px-6 md:px-10"
+      className="bg-[#0C0C0C] rounded-t-[36px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-8 sm:-mt-12 md:-mt-14 relative z-10 pt-12 sm:pt-28 md:pt-36 pb-20 sm:pb-40 px-3.5 sm:px-6 md:px-10"
     >
       {/* Heading */}
-      <FadeIn delay={0} y={40} className="w-full text-center mb-16 sm:mb-20 md:mb-24">
-        <span className="text-xs uppercase tracking-widest text-purple-400 font-semibold mb-3 inline-block">
+      <FadeIn delay={0} y={40} className="w-full text-center mb-8 sm:mb-20 md:mb-24">
+        <span className="text-[11px] sm:text-xs uppercase tracking-widest text-purple-400 font-semibold mb-2 sm:mb-3 inline-block">
           Featured Agency Portfolio
         </span>
         <h2
           className="hero-heading font-black uppercase text-center leading-none tracking-tight"
-          style={{ fontSize: 'clamp(2.5rem, 8vw, 100px)' }}
+          style={{ fontSize: 'clamp(2.1rem, 7vw, 100px)' }}
         >
           Selected Work
         </h2>
-        <p className="text-[#D7E2EA]/70 max-w-xl mx-auto text-sm sm:text-base font-light mt-4">
+        <p className="text-[#D7E2EA]/70 max-w-xl mx-auto text-xs sm:text-base font-light mt-3 sm:mt-4 px-2">
           Real creative projects engineered for high retention, community engagement, and brand prestige.
         </p>
       </FadeIn>

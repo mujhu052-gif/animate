@@ -1,5 +1,5 @@
 import React from 'react';
-import { Instagram, Facebook, Phone, Mail, MessageCircle } from 'lucide-react';
+import { Instagram, Facebook, Mail, MessageCircle } from 'lucide-react';
 
 export const TikTokIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -24,20 +24,20 @@ export const SocialLinksBar: React.FC<SocialLinksBarProps> = ({
 
   const socials = [
     {
-      name: 'Instagram',
-      href: 'https://instagram.com/meticmedia',
+      name: 'Instagram (meticmedia9)',
+      href: 'https://www.instagram.com/meticmedia9?stkn=MTNwd2N2bzFnd2hhaw%3D%3D&utm_source=qr',
       icon: Instagram,
       hoverClass: 'hover:text-pink-400 hover:border-pink-500/60 hover:bg-pink-500/10',
     },
     {
       name: 'Facebook',
-      href: 'https://facebook.com/meticmedia',
+      href: 'https://www.facebook.com/share/1KGF8a3Rh3/',
       icon: Facebook,
       hoverClass: 'hover:text-blue-400 hover:border-blue-500/60 hover:bg-blue-500/10',
     },
     {
-      name: 'TikTok',
-      href: 'https://tiktok.com/@meticmedia',
+      name: 'TikTok (@metic_media)',
+      href: 'https://www.tiktok.com/@metic_media',
       icon: TikTokIcon,
       hoverClass: 'hover:text-cyan-400 hover:border-cyan-500/60 hover:bg-cyan-500/10',
     },
@@ -52,12 +52,6 @@ export const SocialLinksBar: React.FC<SocialLinksBarProps> = ({
       href: 'mailto:meticmediapk@gmail.com',
       icon: Mail,
       hoverClass: 'hover:text-purple-400 hover:border-purple-500/60 hover:bg-purple-500/10',
-    },
-    {
-      name: 'Phone',
-      href: 'tel:+923403516101',
-      icon: Phone,
-      hoverClass: 'hover:text-violet-400 hover:border-violet-500/60 hover:bg-violet-500/10',
     },
   ];
 

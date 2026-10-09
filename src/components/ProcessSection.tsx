@@ -49,49 +49,49 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenContact })
   return (
     <section
       id="process"
-      className="bg-[#0C0C0C] text-[#D7E2EA] px-5 sm:px-8 md:px-10 py-24 sm:py-32 relative border-t border-white/10"
+      className="bg-[#0C0C0C] text-[#D7E2EA] px-4 sm:px-8 md:px-10 py-12 sm:py-24 md:py-32 relative border-t border-white/10"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <FadeIn delay={0} y={30}>
-          <div className="text-center mb-16 sm:mb-20">
-            <span className="text-xs uppercase tracking-widest text-purple-400 font-semibold mb-3 inline-block">
+          <div className="text-center mb-8 sm:mb-16 md:mb-20">
+            <span className="text-[11px] sm:text-xs uppercase tracking-widest text-purple-400 font-semibold mb-2 sm:mb-3 inline-block">
               How We Work
             </span>
             <h2
-              className="hero-heading font-black uppercase text-center leading-none tracking-tight mb-4"
-              style={{ fontSize: 'clamp(2.5rem, 8vw, 90px)' }}
+              className="hero-heading font-black uppercase text-center leading-none tracking-tight mb-2 sm:mb-4"
+              style={{ fontSize: 'clamp(2.1rem, 7vw, 90px)' }}
             >
               Our Process
             </h2>
-            <p className="text-[#D7E2EA]/70 max-w-xl mx-auto text-sm sm:text-base font-light">
+            <p className="text-[#D7E2EA]/70 max-w-xl mx-auto text-xs sm:text-base font-light px-2">
               A structured, repeatable methodology built to transform ideas into measurable social growth.
             </p>
           </div>
         </FadeIn>
 
         {/* 4 Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 relative">
           {steps.map((step, idx) => {
             const Icon = step.icon;
             return (
               <FadeIn key={step.number} delay={idx * 0.1} y={25} className="h-full">
-                <div className="h-full flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-purple-400/40 hover:bg-white/[0.04] transition-all relative group">
+                <div className="h-full flex flex-col justify-between p-4 sm:p-7 rounded-2xl sm:rounded-3xl bg-white/[0.02] border border-white/10 hover:border-purple-400/40 hover:bg-white/[0.04] transition-all relative group">
                   {/* Step Top */}
                   <div>
-                    <div className="flex items-center justify-between mb-6">
-                      <span className="font-mono text-xs uppercase tracking-widest text-purple-400 font-bold px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20">
+                    <div className="flex items-center justify-between mb-3 sm:mb-6">
+                      <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-purple-400 font-bold px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-purple-500/10 border border-purple-500/20">
                         Step {step.number}
                       </span>
-                      <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/80 group-hover:text-purple-300 group-hover:scale-105 transition-all">
-                        <Icon className="w-5 h-5" />
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/80 group-hover:text-purple-300 group-hover:scale-105 transition-all">
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
                     </div>
 
-                    <h3 className="text-xl sm:text-2xl font-black uppercase text-white tracking-tight mb-1">
+                    <h3 className="text-lg sm:text-2xl font-black uppercase text-white tracking-tight mb-0.5 sm:mb-1">
                       {step.title}
                     </h3>
-                    <span className="text-xs font-medium uppercase tracking-wider text-[#D7E2EA]/50 block mb-3">
+                    <span className="text-[11px] sm:text-xs font-medium uppercase tracking-wider text-[#D7E2EA]/50 block mb-2 sm:mb-3">
                       {step.tagline}
                     </span>
 
@@ -101,7 +101,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenContact })
                   </div>
 
                   {/* Step Bottom Indicator */}
-                  <div className="pt-6 mt-6 border-t border-white/5 flex items-center justify-between text-xs text-[#D7E2EA]/50">
+                  <div className="pt-3 sm:pt-6 mt-3 sm:mt-6 border-t border-white/5 flex items-center justify-between text-[11px] sm:text-xs text-[#D7E2EA]/50">
                     <span className="font-medium text-purple-300/80">{step.highlight}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white/40 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" />
                   </div>
@@ -113,9 +113,9 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenContact })
 
         {/* Bottom Process Note */}
         <FadeIn delay={0.4} y={20}>
-          <div className="mt-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-purple-900/20 via-white/[0.02] to-emerald-950/20 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+          <div className="mt-8 sm:mt-14 p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-purple-900/20 via-white/[0.02] to-emerald-950/20 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 text-center sm:text-left">
             <div>
-              <h4 className="text-lg font-bold uppercase text-white tracking-wide">
+              <h4 className="text-base sm:text-lg font-bold uppercase text-white tracking-wide">
                 Ready to accelerate your brand&apos;s growth?
               </h4>
               <p className="text-xs sm:text-sm text-[#D7E2EA]/70 mt-1">
@@ -125,7 +125,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenContact })
             <button
               onClick={onOpenContact}
               type="button"
-              className="contact-btn px-8 py-3 rounded-full text-white text-xs font-semibold uppercase tracking-widest shrink-0"
+              className="contact-btn px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-white text-xs font-semibold uppercase tracking-widest shrink-0 w-full sm:w-auto"
             >
               Start Discovery
             </button>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Send, CheckCircle2, Mail, Sparkles, Phone, MessageCircle, Instagram } from 'lucide-react';
+import { X, Send, CheckCircle2, Mail, Sparkles, MessageCircle, Instagram } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ContactModalProps {
@@ -139,19 +139,19 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                 </div>
 
                 {/* Quick contact badge bar */}
-                <div className="grid grid-cols-2 gap-2 mb-6 p-3 rounded-2xl bg-white/[0.03] border border-white/5 text-[11px] text-[#D7E2EA]/80">
-                  <a href="tel:+923403516101" className="flex items-center gap-2 hover:text-white truncate">
-                    <Phone className="w-3.5 h-3.5 text-purple-400 shrink-0" />
-                    <span className="truncate">+92 340 3516101</span>
-                  </a>
+                <div className="flex items-center justify-between mb-6 p-3 rounded-2xl bg-white/[0.03] border border-white/5 text-[11px] text-[#D7E2EA]/80">
+                  <span className="flex items-center gap-2 text-purple-300">
+                    <Sparkles className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                    <span>Discovery &amp; Creative Quote</span>
+                  </span>
                   <a
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-emerald-300 hover:text-emerald-200 truncate"
+                    className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 hover:text-emerald-200 hover:bg-emerald-500/20 transition-all font-medium"
                   >
                     <MessageCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>WhatsApp Available</span>
+                    <span>WhatsApp</span>
                   </a>
                 </div>
 

@@ -1,125 +1,227 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Volume2, VolumeX, Play, Pause, Film } from 'lucide-react';
 
-const ROW_1_IMAGES = [
-  'https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif',
-  'https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif',
-  'https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif',
-  'https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif',
-  'https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif',
-  'https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif',
-  'https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif',
-  'https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif',
-  'https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif',
-  'https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif',
-  'https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif',
+/**
+ * ============================================================================
+ * METIC MEDIA - HERO SHOWREEL MP4 VIDEOS
+ * ============================================================================
+ * You can easily replace or update any of these MP4 video files!
+ *
+ * Option 1: Put your .mp4 files into the "public/videos/" folder in your project:
+ *           - /videos/reel_sample_1.mp4
+ *           - /videos/reel_sample_2.mp4
+ *           - /videos/reel_sample_3.mp4
+ *           - /videos/reel_sample_4.mp4
+ *
+ * Option 2: Put direct online MP4 video URLs in the lists below:
+ *           - 'https://example.com/video.mp4'
+ * ============================================================================
+ */
+export const ROW_1_VIDEOS: { src: string; title: string; category: string }[] = [
+  { src: '/videos/reel_sample_1.mp4', title: 'Viral Reel Hook', category: 'Short-Form Reel' },
+  { src: '/videos/reel_sample_2.mp4', title: 'Brand Story Visual', category: 'Commercial Edit' },
+  { src: '/videos/reel_sample_3.mp4', title: 'Kinetic Motion Showcase', category: 'Motion Design' },
+  { src: '/videos/reel_sample_4.mp4', title: 'High-Retention Short', category: 'TikTok / Reel' },
+  { src: '/videos/reel_sample_1.mp4', title: 'Creative Cut', category: 'Social Media' },
+  { src: '/videos/reel_sample_2.mp4', title: 'Dynamic Transition', category: 'Short-Form' },
 ];
 
-const ROW_2_IMAGES = [
-  'https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif',
-  'https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif',
-  'https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif',
-  'https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif',
-  'https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif',
-  'https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif',
-  'https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif',
-  'https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif',
-  'https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif',
-  'https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif',
+export const ROW_2_VIDEOS: { src: string; title: string; category: string }[] = [
+  { src: '/videos/reel_sample_3.mp4', title: 'Cinematic Atmosphere', category: 'Color Grade & Sound' },
+  { src: '/videos/reel_sample_4.mp4', title: 'Product Showcase Reel', category: 'Brand Promotion' },
+  { src: '/videos/reel_sample_1.mp4', title: 'Pacing & Narrative', category: 'Storytelling' },
+  { src: '/videos/reel_sample_2.mp4', title: 'Sound Design & Beats', category: 'Audio Sync' },
+  { src: '/videos/reel_sample_3.mp4', title: 'Fast-Cut Retention', category: 'Viral Content' },
+  { src: '/videos/reel_sample_4.mp4', title: 'Agency Highlight', category: 'Portfolio' },
 ];
 
-// Tripled lists for infinite seamless coverage
-const ROW_1_TRIPLED = [...ROW_1_IMAGES, ...ROW_1_IMAGES, ...ROW_1_IMAGES];
-const ROW_2_TRIPLED = [...ROW_2_IMAGES, ...ROW_2_IMAGES, ...ROW_2_IMAGES];
+interface VideoTileProps {
+  item: { src: string; title: string; category: string };
+  index: number;
+}
 
-export const MarqueeSection: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [offset, setOffset] = useState<number>(0);
+const VideoTile: React.FC<VideoTileProps> = ({ item, index }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  const isMp4 = item.src.toLowerCase().includes('.mp4') || item.src.toLowerCase().includes('.webm');
 
   useEffect(() => {
-    let animationFrameId: number;
+    const video = videoRef.current;
+    if (!video || !isMp4) return;
 
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const sectionTop = rect.top + window.scrollY;
-      const calculatedOffset = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
-      setOffset(calculatedOffset);
+    // Strict browser autoplay policy requirements
+    video.defaultMuted = true;
+    video.muted = true;
+    video.playsInline = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+
+    const tryPlay = () => {
+      const promise = video.play();
+      if (promise !== undefined) {
+        promise
+          .then(() => {
+            setIsPlaying(true);
+            setIsLoaded(true);
+          })
+          .catch(() => {
+            video.muted = true;
+            video.play().catch(() => {
+              setIsPlaying(false);
+            });
+          });
+      }
     };
 
-    const onScroll = () => {
-      cancelAnimationFrame(animationFrameId);
-      animationFrameId = requestAnimationFrame(handleScroll);
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
+    if (video.readyState >= 2) {
+      tryPlay();
+    } else {
+      video.addEventListener('loadeddata', tryPlay, { once: true });
+      video.addEventListener('canplay', tryPlay, { once: true });
+    }
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', handleScroll);
+      video.removeEventListener('loadeddata', tryPlay);
+      video.removeEventListener('canplay', tryPlay);
     };
-  }, []);
+  }, [item.src, isMp4]);
 
-  // Center baseline around middle third of tripled items
-  const baseOffset = -2200;
-  const row1X = baseOffset + (offset - 200);
-  const row2X = -1000 - (offset - 200);
+  const togglePlay = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true)).catch(() => {});
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const toggleSound = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+
+    const nextMuted = !video.muted;
+    video.muted = nextMuted;
+    setIsMuted(nextMuted);
+
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true)).catch(() => {});
+    }
+  };
+
+  return (
+    <div
+      onClick={togglePlay}
+      className="w-[260px] xs:w-[300px] sm:w-[420px] h-[170px] xs:h-[190px] sm:h-[260px] min-w-[260px] xs:min-w-[300px] sm:min-w-[420px] rounded-2xl overflow-hidden bg-[#161616] border border-white/10 relative shrink-0 shadow-2xl group cursor-pointer transition-all duration-300 hover:border-purple-500/50 hover:shadow-purple-900/20"
+    >
+      {isMp4 && !hasError ? (
+        <video
+          ref={videoRef}
+          src={item.src}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          onError={() => setHasError(true)}
+          onLoadedData={() => setIsLoaded(true)}
+          className="w-full h-full object-cover select-none group-hover:scale-105 transition-transform duration-500"
+        />
+      ) : (
+        /* Fallback graphic if video format is unavailable */
+        <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#1A0B2E] via-[#0D0D14] to-[#1F0E1F] p-6 text-center">
+          <Film className="w-10 h-10 text-purple-400 mb-2 opacity-80" />
+          <p className="text-sm font-semibold text-white uppercase tracking-wider">{item.title}</p>
+          <span className="text-xs text-purple-300/70 mt-1">{item.category}</span>
+        </div>
+      )}
+
+      {/* Clean minimalist controls overlay (No text blocking the video) */}
+      <div className="absolute top-3 right-3 flex items-center gap-2 z-10">
+        {/* Audio Toggle Button */}
+        {isMp4 && (
+          <button
+            type="button"
+            onClick={toggleSound}
+            title={isMuted ? 'Click to Unmute' : 'Click to Mute'}
+            className="pointer-events-auto p-2 rounded-full bg-black/60 hover:bg-black/90 backdrop-blur-md border border-white/20 text-white transition-all hover:scale-110 active:scale-95 shadow-lg"
+          >
+            {isMuted ? <VolumeX className="w-3.5 h-3.5 text-white/80" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
+          </button>
+        )}
+      </div>
+
+      {/* Play/Pause state icon badge on bottom right (no text) */}
+      <div className="absolute bottom-3 right-3 p-2 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white/90 group-hover:scale-110 transition-transform shadow-lg pointer-events-none">
+        {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-white" />}
+      </div>
+    </div>
+  );
+};
+
+export const MarqueeSection: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Link movement directly to scroll progress across the section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start'],
+  });
+
+  // Row 1 moves horizontally on scroll (leftwards)
+  const xRow1 = useTransform(scrollYProgress, [0, 1], ['0%', '-25%']);
+
+  // Row 2 moves horizontally on scroll (rightwards)
+  const xRow2 = useTransform(scrollYProgress, [0, 1], ['-25%', '0%']);
+
+  // Repeat items to fill wide viewports
+  const row1Items = [...ROW_1_VIDEOS, ...ROW_1_VIDEOS];
+  const row2Items = [...ROW_2_VIDEOS, ...ROW_2_VIDEOS];
 
   return (
     <section
-      ref={sectionRef}
+      ref={containerRef}
       id="marquee"
-      className="bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden relative select-none"
+      className="bg-[#0C0C0C] py-10 sm:py-14 md:py-16 overflow-hidden relative select-none"
     >
-      <div className="flex flex-col gap-3">
-        {/* Row 1 - moves RIGHT on scroll */}
-        <div
-          className="flex gap-3"
-          style={{
-            transform: `translateX(${row1X}px)`,
-            willChange: 'transform',
-          }}
-        >
-          {ROW_1_TRIPLED.map((src, index) => (
-            <div
-              key={`row1-${index}`}
-              className="w-[420px] h-[270px] min-w-[420px] rounded-2xl overflow-hidden bg-white/5 border border-white/5 relative shrink-0 shadow-lg"
-            >
-              <img
-                src={src}
-                alt={`3D Motion Showreel ${index + 1}`}
-                referrerPolicy="no-referrer"
-                loading="lazy"
-                className="w-full h-full object-cover select-none pointer-events-none hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-          ))}
+      <div className="flex flex-col gap-4 sm:gap-5">
+        {/* Track 1 - moves on page scroll (no infinite time loop) */}
+        <div className="relative w-full overflow-hidden">
+          <motion.div
+            className="flex gap-4 sm:gap-5 will-change-transform"
+            style={{
+              x: xRow1,
+              width: 'max-content',
+            }}
+          >
+            {row1Items.map((item, index) => (
+              <VideoTile key={`row1-${index}`} item={item} index={index} />
+            ))}
+          </motion.div>
         </div>
 
-        {/* Row 2 - moves LEFT on scroll */}
-        <div
-          className="flex gap-3"
-          style={{
-            transform: `translateX(${row2X}px)`,
-            willChange: 'transform',
-          }}
-        >
-          {ROW_2_TRIPLED.map((src, index) => (
-            <div
-              key={`row2-${index}`}
-              className="w-[420px] h-[270px] min-w-[420px] rounded-2xl overflow-hidden bg-white/5 border border-white/5 relative shrink-0 shadow-lg"
-            >
-              <img
-                src={src}
-                alt={`3D Motion Showreel ${index + 12}`}
-                referrerPolicy="no-referrer"
-                loading="lazy"
-                className="w-full h-full object-cover select-none pointer-events-none hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-          ))}
+        {/* Track 2 - moves opposite on page scroll (no infinite time loop) */}
+        <div className="relative w-full overflow-hidden">
+          <motion.div
+            className="flex gap-4 sm:gap-5 will-change-transform"
+            style={{
+              x: xRow2,
+              width: 'max-content',
+            }}
+          >
+            {row2Items.map((item, index) => (
+              <VideoTile key={`row2-${index}`} item={item} index={index} />
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
